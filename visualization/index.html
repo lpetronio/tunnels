@@ -23,13 +23,117 @@
 
 </body>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="build/js/Tunnel.min.js"></script>
+<script src="build/js/ancestrySuiteVisualization.min.js"></script>
 <script>
-  
-  Tunnel.loadData()
-    // document.addEventListener('DOMContentLoaded', function () {
-    //     Tunnel.loadData()
-    // });
+    let config = {
+        query: {
+            gene: "", /* query for a gene, or list of genes */
+            chromosome: "chr1", /* QUESTION: does user input a gene AND chromosome? */
+            referenceGenome: ""
+        },
+        summaryView: {
+            rootId: "plot-wrapper",
+            domId: "summary",
+            dimension: { width: undefined, height: undefined, innerWidth: undefined, innerHeight: undefined },
+            padding: { top: 200, right: 150, bottom: 150, left: 150 },
+            plotConfig: {
+                label: "key",
+                axis: {
+                    x: undefined,
+                    y: undefined
+                },
+                node: {
+                    color: {
+                        attr: "mismatchFrequency",
+                        type: "SEQUENTIAL"
+                    },
+                    label: "mismatchFrequency"
+                },
+                series: {
+                    color: {
+                        attr: "mismatchFrequency",
+                        type: "SEQUENTIAL"
+                    },
+                    customColor: {
+                        attr: "ancestry",
+                        type: "ORDINAL"
+                    },
+                    outerRadius: "mismatchFrequency"
+                }
+            }
+        },
+        detailView: {
+            rootId: "plot-wrapper",
+            domId: "detail",
+            dimension: { width: undefined, height: 400, innerWidth: undefined, innerHeight: undefined },
+            padding: { top: 100, right: 150, bottom: 100, left: 150 },
+            plotConfig: {
+                label: "key",
+                axis: {
+                    x: "position",
+                    y: "guideID"
+                },
+                series: {
+                    color: {
+                        attr: "ancestry",
+                        type: "ORDINAL"
+                    },
+                    customColor: {
+                        attr: "ancestry",
+                        type: "ORDINAL"
+                    },
+                    outerRadius: "mismatchFrequency"
+                }
+            }
+        },
+        gardenView: {
+            rootId: "garden-plot-wrapper",
+            domId: "garden",
+            dimension: { width: undefined, height: undefined, innerWidth: undefined, innerHeight: undefined },
+            padding: { top: 50, right: 150, bottom: 50, left: 150 },
+            plotConfig: {
+                label: "key",
+                axis: {
+                    x: undefined,
+                    y: "guideID"
+                },
+                track: {
+                    axis: {
+                        x: "position"
+                    }
+                },
+                point: {
+                    label: "key",
+                    axis: {
+                        x: "position"
+                    },
+                    series: {
+                        color: {
+                            attr: "ancestry",
+                            type: "ORDINAL"
+                        },
+                        customColor: {
+                            attr: "ancestry",
+                            type: "ORDINAL"
+                        },
+                        outerRadius: "mismatchFrequency"
+                    }
+                }
+
+            }
+        }
+
+    }
+    const dataFiles = {
+        guideData: "data/guideData_.json",
+        guidesToMismatchFrequency: "data/guidesToMismatchFrequency_.json",
+        guidesToGenes: "data/guidesToGenes_.json"
+
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        ancestrySuiteVisualization.loadData(config, dataFiles)
+    });
 
 
 

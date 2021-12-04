@@ -1,2 +1,2 @@
-const Tunnel = require("../src/js/Tunnel.js");
-module.exports = Tunnel;
+const ancestrySuiteVisualization = require("../src/js/ancestrySuiteVisualization.js");
+module.exports = ancestrySuiteVisualization;
