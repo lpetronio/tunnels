@@ -189,18 +189,19 @@ function createDetailPlotData(data, config){
 }
 
 
-export async function loadData(config, dataFiles){
-  let returned = {}
-  await Promise.all([
-    d3.json(`${dataFiles.guideData}`),
-    d3.json(`${dataFiles.guidesToMismatchFrequency}`),
-    d3.json(`${dataFiles.guidesToGenes}`)
-  ])
-  .then(data => {
-     returned.guides = data[0].filter(d=> { return d.ancestry != "total" })
-     returned.guidesToMismatchFrequency = data[1]
-     returned.guidesToGenes = data[2]
-  })
-  controller(config, returned)
+export async function loadData(config){
+  console.log(config)
+  // let returned = {}
+  // await Promise.all([
+  //   d3.json(`${dataFiles.guideData}`),
+  //   d3.json(`${dataFiles.guidesToMismatchFrequency}`),
+  //   d3.json(`${dataFiles.guidesToGenes}`)
+  // ])
+  // .then(data => {
+  //    returned.guides = data[0].filter(d=> { return d.ancestry != "total" })
+  //    returned.guidesToMismatchFrequency = data[1]
+  //    returned.guidesToGenes = data[2]
+  // })
+  // controller(config, returned)
 }
 
