@@ -1,0 +1,27 @@
+{
+  "name": "ancestrySuite-minisite",
+  "version": "1.0.0",
+  "description": "Visualizations developed by the Pattern team",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/broadinstitute/ancestrySuite-minisite.git"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Lia Petronio",
+    "email": "lpetroni@broadinstitute.org"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/broadinstitute/ancestrySuite-minisite/issues"
+  },
+  "homepage": "https://github.com/broadinstitute/ancestrySuite-minisite#readme",
+  "dependencies": {
+    "d3": "^5.15.0",
+    "jquery": "^3.5.1"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "ancestrySuite-minisite",
+  "version": "1.0.0",
+  "description": ".",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "webpack-dev-server --config webpack.config.dev.js",
+    "build": "webpack --mode production --config webpack.config.js",
+    "eslint": "eslint ../src"
+  },
+  "keywords": [
+    "",
+    ""
+  ],
+  "author": {
+    "name": "Lia Petronio",
+    "email": "lpetroni@broadinstitute.org"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "d3-scale-chromatic": "^2.0.0",
+    "eslint": "^6.8.0",
+    "jquery": "^3.5.1"
+  }
+}
