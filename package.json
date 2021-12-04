@@ -22,6 +22,7 @@
   "homepage": "https://github.com/lpetroni/Tunnels#readme",
   "dependencies": {
     "d3": "^5.15.0",
-    "jquery": "^3.5.1"
+    "jquery": "^3.5.1",
+    "three": "^0.135.0"
   }
 }

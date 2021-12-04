@@ -1,4 +1,5 @@
 import * as d3 from "d3";
+import * as THREE from 'three';
 import {range, extent, mean, median} from "d3-array";
 import PolarArea from "../plots/PolarArea.js";
 import Aster from "../plots/Aster.js";
@@ -189,19 +190,77 @@ function createDetailPlotData(data, config){
 }
 
 
-export async function loadData(config){
-  console.log(config)
-  // let returned = {}
-  // await Promise.all([
-  //   d3.json(`${dataFiles.guideData}`),
-  //   d3.json(`${dataFiles.guidesToMismatchFrequency}`),
-  //   d3.json(`${dataFiles.guidesToGenes}`)
-  // ])
-  // .then(data => {
-  //    returned.guides = data[0].filter(d=> { return d.ancestry != "total" })
-  //    returned.guidesToMismatchFrequency = data[1]
-  //    returned.guidesToGenes = data[2]
-  // })
-  // controller(config, returned)
+export async function loadData(){
+  console.log("loaded")
+
+  render()
 }
 
+function render(){
+    //Get window size
+  var ww = window.innerWidth,
+  wh = window.innerHeight;
+
+//Create a WebGL renderer
+var renderer = new THREE.WebGLRenderer({
+  canvas: document.querySelector("canvas")
+});
+renderer.setSize(ww, wh);
+
+//Create an empty scene
+var scene = new THREE.Scene();
+
+//Create a perpsective camera
+var camera = new THREE.PerspectiveCamera(45, ww / wh, 0.001, 1000);
+camera.position.z = 400;
+
+//Array of points
+var points = [
+  [68.5,185.5],
+  [1,262.5],
+  [270.9,281.9],
+  [345.5,212.8],
+  [178,155.7],
+  [240.3,72.3],
+  [153.4,0.6],
+  [52.6,53.3],
+  [68.5,185.5]
+];
+
+//Convert the array of points into vertices
+for (var i = 0; i < points.length; i++) {
+  var x = points[i][0];
+  var y = 0;
+  var z = points[i][1];
+  points[i] = new THREE.Vector3(x, y, z);
+}
+//Create a path from the points
+var path = new THREE.CatmullRomCurve3(points);
+
+//Create the tube geometry from the path
+var geometry = new THREE.TubeGeometry( path, 300, 2, 20, true );
+//Basic material
+var material = new THREE.MeshBasicMaterial( { color: 0xff0000, side : THREE.BackSide, wireframe:true } );
+//Create a mesh
+var tube = new THREE.Mesh( geometry, material );
+//Add tube into the scene
+scene.add( tube );
+
+
+var percentage = 0;
+function render(){
+
+  percentage += 0.0001;
+  var p1 = path.getPointAt(percentage%1);
+  var p2 = path.getPointAt((percentage + 0.01)%1);
+  camera.position.set(p1.x,p1.y,p1.z);
+  camera.lookAt(p2);
+  
+  //Render the scene
+  renderer.render(scene, camera);
+
+  requestAnimationFrame(render);
+}
+requestAnimationFrame(render);
+
+}
