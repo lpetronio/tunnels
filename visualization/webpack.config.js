@@ -1,6 +1,6 @@
 const path = require("path");
-const filename = "ancestrySuiteVisualization.min.js";
-const library = "ancestrySuiteVisualization";
+const filename = "Tunnel.min.js";
+const library = "Tunnel";
 module.exports = {
     entry: "./index.js",
     output: {

@@ -1,5 +1,5 @@
 {
-  "name": "ancestrySuite-minisite",
+  "name": "Tunnels",
   "version": "1.0.0",
   "description": "Visualizations developed by the Pattern team",
   "main": "index.js",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/broadinstitute/ancestrySuite-minisite.git"
+    "url": "git+https://github.com/broadinstitute/Tunnels.git"
   },
   "keywords": [],
   "author": {
@@ -17,9 +17,9 @@
   },
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/broadinstitute/ancestrySuite-minisite/issues"
+    "url": "https://github.com/broadinstitute/Tunnels/issues"
   },
-  "homepage": "https://github.com/broadinstitute/ancestrySuite-minisite#readme",
+  "homepage": "https://github.com/broadinstitute/Tunnels#readme",
   "dependencies": {
     "d3": "^5.15.0",
     "jquery": "^3.5.1"
