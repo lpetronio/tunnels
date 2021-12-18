@@ -6,7 +6,7 @@ import * as THREE from 'three';
 export async function loadData(){
   console.log("loaded")
   // renderPolygons()
-  //renderSquares()
+// renderSquares()
 
 }
 function renderPolygons(){
@@ -95,6 +95,7 @@ renderer.setSize(ww, wh);
 
 //Create an empty scene
 var scene = new THREE.Scene();
+// scene.fog = new THREE.Fog(0x000000, 30, 150);
 scene.fog = new THREE.Fog(0x000000, 30, 150);
 
 //Create a perpsective camera
@@ -105,7 +106,7 @@ camera.position.z = 400;
 //Array of points
 var points = [
   [68.5, 185.5],
-[1, 262.5],
+  [1, 262.5],
   [270.9, 281.9],
   [345.5, 212.8],
   [178, 155.7],
@@ -127,9 +128,11 @@ var path = new THREE.CatmullRomCurve3(points);
 path.closed = true;
 
 // Define the precision of the finale tube, the amount of divisions
+// var tubeDetail = 500;
 var tubeDetail = 500;
 // Define the precision of the circles
-var circlesDetail = 10;
+// var circlesDetail = 10;
+var circlesDetail = 50;
 
 // Define the radius of the finale tube
 var radius = 8;
@@ -141,6 +144,7 @@ var geometry = new THREE.BufferGeometry();
 
 // Define a basic color
 var color = new THREE.Color(0x000000);
+//var color = new THREE.Color( 'skyblue' );
 
 // Seed the perlin noise function with a random value
 noise.seed(Math.random());
@@ -185,8 +189,18 @@ for (var i = 0; i < tubeDetail; i++) {
 
     // We add the normal values for each point
     position.add(normalPoint);
-    var perlin = Math.abs(noise.simplex3(position.x*0.008, position.y*0.01, position.z*0.005));
-    var color = new THREE.Color("hsl(" + (perlin * 360) + ", 50%, 50%)");
+    //var perlin = Math.abs(noise.simplex3(position.x*0.008, position.y*0.01, position.z*0.005));
+    var perlin = Math.abs(position.z*0.005);
+   // var perlin = Math.abs(position.x*0.008, position.y*0.01, position.z*0.005);
+
+    //  var color = new THREE.Color("hsl(" + (perlin * 360) + ", 50%, 50%)");
+
+
+    //var color = new THREE.Color(`hsl(${(.1)}, ${Math.floor(perlin*100)}%, ${perlinLight}%)`);
+
+    var color = new THREE.Color(`hsl(1, 50%, ${1 + Math.floor((perlin*30))}%)`);
+
+   // var color = new THREE.Color(`hsl(${perlin * 360},${perlin * 360}, ${perlin * 360})`);
     
     var mesh = cubeMesh.clone(false);
     mesh.position.set(position.x, position.y, position.z);
