@@ -5,7 +5,7 @@ import * as THREE from 'three';
 
 export async function loadData(){
   console.log("loaded")
-  // renderPolygons()
+  //renderPolygons()
 // renderSquares()
 
 }

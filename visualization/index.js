@@ -1,2 +1,2 @@
-const ancestrySuiteVisualization = require("../src/js/ancestrySuiteVisualization.js");
-module.exports = ancestrySuiteVisualization;
+const TunnelProductions = require("../src/js/TunnelProductions.js");
+module.exports = TunnelProductions;
