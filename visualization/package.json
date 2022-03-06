@@ -19,11 +19,13 @@
   },
   "license": "ISC",
   "devDependencies": {
+    "@theatre/studio": "^0.4.7",
     "webpack": "^4.41.6",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "@theatre/core": "^0.4.7",
     "d3-scale-chromatic": "^2.0.0",
     "eslint": "^6.8.0",
     "jquery": "^3.5.1",

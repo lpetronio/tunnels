@@ -1,14 +1,87 @@
 import * as d3 from "d3";
 import * as THREE from 'three';
 
+import {getProject} from "@theatre/core"
+import studio from "@theatre/studio"
+
+
+
 
 
 export async function loadData(){
+
   console.log("loaded")
-  // renderPolygons()
+// initialize the studio so the editing tools will show up on the screen
+studio.initialize()
+
+// create a project
+const proj = getProject(
+  // the ID of the project is "My first project"
+  "First project"
+)
+
+// create a sheet
+const sheet = proj.sheet(
+  // Our sheet is identified as "Scene"
+  "Scene"
+)
+// create an object
+const obj = sheet.object(
+  // The object's key is "Fist object"
+  "First object",
+  // These are the object's default values (and as we'll later learn, its props types)
+  {
+    // we pick our first props's name to be "foo". It's default value is 0.
+    // Theatre will determine that the type of this prop is a number
+    foo: 0,
+    // Second prop is a boolean called "bar", and it defaults to true.
+    bar: true,
+    // Last prop is a string
+    baz: "A string",
+  }
+)
+// Calls the callback every time the values change
+const unsubscribe = obj.onValuesChange(function callback(newValue) {
+  console.log(newValue.foo) // prints a number
+  console.log(newValue.bar) // prints a boolean
+  console.log(newValue.baz) // prints a string
+})
+
+// stop listening to changes after 5 seconds:
+setTimeout(unsubscribe, 5000)
+
+
+//   renderPolygons()
 // renderSquares()
 
 }
+
+
+class CustomSinCurve extends THREE.Curve {
+
+	constructor( scale = 1 ) {
+
+		super();
+
+		this.scale = scale;
+
+	}
+
+	getPoint( t, optionalTarget = new THREE.Vector3() ) {
+
+		const tx = t * 3 - 1.5;
+		const ty = Math.sin( 2 * Math.PI * t );
+		const tz = 0;
+
+		return optionalTarget.set( tx, ty, tz ).multiplyScalar( this.scale );
+
+	}
+
+}
+
+//const path = new CustomSinCurve( 10 );
+
+
 function renderPolygons(){
   function render(){
     //Get window size
@@ -52,9 +125,13 @@ for (var i = 0; i < points.length; i++) {
 var path = new THREE.CatmullRomCurve3(points);
 
 //Create the tube geometry from the path
-var geometry = new THREE.TubeGeometry( path, 300, 2, 20, true );
+var geometry = new THREE.TubeGeometry( path, 200, 7, 100, true );
+let h = 50, s = 80, l = 20;
+let color = new THREE.Color(`hsl(${h}, ${s}%, ${l}%)`);
+
 //Basic material
-var material = new THREE.MeshBasicMaterial( { color: 0xff0000, side : THREE.BackSide, wireframe:true } );
+var material = new THREE.MeshBasicMaterial( { color: color, side : THREE.BackSide, wireframe:true } );
+
 //Create a mesh
 var tube = new THREE.Mesh( geometry, material );
 //Add tube into the scene
@@ -64,7 +141,8 @@ scene.add( tube );
 var percentage = 0;
 function render(){
 
-  percentage += 0.0001;
+  percentage += 0.0002;
+  h +=.01;
   var p1 = path.getPointAt(percentage%1);
   var p2 = path.getPointAt((percentage + 0.01)%1);
   camera.position.set(p1.x,p1.y,p1.z);
@@ -73,7 +151,7 @@ function render(){
   //Render the scene
   renderer.render(scene, camera);
 
-  requestAnimationFrame(render);
+// requestAnimationFrame(render);
 }
 requestAnimationFrame(render);
 
